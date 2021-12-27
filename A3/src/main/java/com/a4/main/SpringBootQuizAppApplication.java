@@ -1,4 +1,4 @@
-package com.devrezaur.main;
+package com.a4.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

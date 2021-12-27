@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/score.css}">
+	<title>Score Board</title>
+</head>
+<body>
+	
+	<!-- Main Container Start -->
+	<div class="main-container container py-5 px-4">
+		<h3 class="bg-warning text-center mb-5 p-2">ScoreBoard</h3>
+		<table>
+			<tr class="bg-dark text-light">
+				<th>Name</th>
+				<th>Score</th>
+			</tr>
+			<tr th:each="score : ${sList}">
+				<td th:text="${score.username}"></td>
+				<td th:text="${score.totalCorrect}"></td>
+			</tr>
+		</table>
+		<div class="d-flex justify-content-center mt-4">
+			<button type="button" th:onclick="home()"
+					class="btn btn-outline-warning mx-auto">Back Home</button>
+		</div>
+	</div>
+
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript">
+		function home(){
+			window.location="/";
+		}
+	</script>
+</body>
+</html>

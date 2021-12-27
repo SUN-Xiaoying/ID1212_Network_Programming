@@ -1,8 +1,8 @@
-package com.a4.main.repository;
+package com.xiao.courseflow.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.a4.main.model.Result;
+import com.xiao.courseflow.model.Result;
 
 @Repository
 public interface ResultRepo extends JpaRepository<Result, Integer> {

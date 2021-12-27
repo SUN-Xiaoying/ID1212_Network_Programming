@@ -1,4 +1,4 @@
-package com.a4.main.model;
+package com.xiao.courseflow.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

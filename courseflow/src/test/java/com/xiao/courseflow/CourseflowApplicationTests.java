@@ -1,13 +1,13 @@
-package com.a4.main;
+package com.xiao.courseflow;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBootQuizAppApplicationTests {
+class CourseflowApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }

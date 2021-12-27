@@ -1,7 +1,7 @@
-package com.a4.main.service;
+package com.xiao.courseflow.service;
 
-import com.a4.main.model.User;
-import com.a4.main.repository.UserRepo;
+import com.xiao.courseflow.model.User;
+import com.xiao.courseflow.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,15 +1,15 @@
-package com.a4.main.service;
+package com.xiao.courseflow.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import com.a4.main.model.Question;
-import com.a4.main.model.QuestionForm;
-import com.a4.main.model.Result;
-import com.a4.main.repository.QuestionRepo;
-import com.a4.main.repository.ResultRepo;
+import com.xiao.courseflow.model.Question;
+import com.xiao.courseflow.model.QuestionForm;
+import com.xiao.courseflow.model.Result;
+import com.xiao.courseflow.repository.QuestionRepo;
+import com.xiao.courseflow.repository.ResultRepo;
 
 @Service
 public class QuizService {

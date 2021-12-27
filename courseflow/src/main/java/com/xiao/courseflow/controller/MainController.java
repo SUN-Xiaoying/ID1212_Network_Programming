@@ -1,11 +1,11 @@
-package com.a4.main.controller;
+package com.xiao.courseflow.controller;
 
 import java.util.List;
 
-import com.a4.main.model.Question;
-import com.a4.main.model.User;
-import com.a4.main.service.UserNotFoundException;
-import com.a4.main.service.UserService;
+import com.xiao.courseflow.model.Question;
+import com.xiao.courseflow.model.User;
+import com.xiao.courseflow.service.UserNotFoundException;
+import com.xiao.courseflow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.a4.main.model.QuestionForm;
-import com.a4.main.model.Result;
-import com.a4.main.service.QuizService;
+import com.xiao.courseflow.model.QuestionForm;
+import com.xiao.courseflow.model.Result;
+import com.xiao.courseflow.service.QuizService;
 
 @Controller
 public class MainController {

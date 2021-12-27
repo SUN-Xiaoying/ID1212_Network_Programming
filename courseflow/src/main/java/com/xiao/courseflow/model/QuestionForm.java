@@ -1,4 +1,4 @@
-package com.a4.main.model;
+package com.xiao.courseflow.model;
 import java.util.List;
 import org.springframework.stereotype.Component;
 

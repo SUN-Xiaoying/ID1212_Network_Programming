@@ -1,6 +1,6 @@
-package com.a4.main.repository;
+package com.xiao.courseflow.repository;
 
-import com.a4.main.model.User;
+import com.xiao.courseflow.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
