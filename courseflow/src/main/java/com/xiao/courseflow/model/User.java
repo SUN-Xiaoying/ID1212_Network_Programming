@@ -15,6 +15,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    private boolean enabled;
+
     public Integer getId() {
         return id;
     }
@@ -39,12 +41,21 @@ public class User {
         this.password = password;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public String toString(){
         return "User{"+
                 "id = " + id + "\n" +
                 "name = " + username + "\n" +
                 "pass = " + password + "\n" +
+                "enabled = " + enabled + "\n" +
                 "}";
     }
 }

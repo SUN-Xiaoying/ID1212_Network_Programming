@@ -22,21 +22,6 @@ public class Question {
 	private int ans;
 	private int chose;
 
-	public Question() {
-		super();
-	}
-
-	public Question(int id, String title, String optionA, String optionB, String optionC, int ans, int chose) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.optionA = optionA;
-		this.optionB = optionB;
-		this.optionC = optionC;
-		this.ans = ans;
-		this.chose = chose;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -95,7 +80,7 @@ public class Question {
 
 	@Override
 	public String toString(){
-		return "User{"+
+		return "Question{"+
 				"id = " + id + "\n" +
 				"title = " + title + "\n" +
 				"options = " + optionA+"/"+optionB+"/"+optionC + "\n" +

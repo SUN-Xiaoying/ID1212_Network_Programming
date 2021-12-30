@@ -17,33 +17,43 @@ public class UserService {
         return (List<User>) repo.findAll();
     }
 
-    public void save(User user){ repo.save(user);}
+    public void save(User user){
+        if(user.getUsername().contains("@kth.se")){
+            repo.save(user);
+        }
+    }
 
     public User get(Integer id) throws UserNotFoundException {
         Optional<User> result = repo.findById(id);
         if(result.isPresent()){
             return result.get();
-        } throw new UserNotFoundException("Could not find user!");
+        } throw new UserNotFoundException("User not found!");
     }
 
-    public Boolean checkName(String username) throws UserNotFoundException {
-        Boolean bool = true;
-        User optionUser = repo.findByName(username);
-        if (optionUser == null) {
-            bool = false;
-            throw new UserNotFoundException("User not found");
+    public User findbyName(String username)throws UserNotFoundException{
+        User result = repo.findByName(username);
+        if(Objects.nonNull(result)){
+            return result;
+        } throw new UserNotFoundException("User not found!");
+    }
+
+    public void delete(Integer id) throws UserNotFoundException {
+        Long count = repo.countById(id);
+        if (count == null || count == 0){
+            throw new UserNotFoundException("Could not find user by ID " +id);
         }
-        return bool;
+        repo.deleteById(id);
     }
 
-    public boolean checkUser(User user) throws UserNotFoundException {
+    /* Login */
+    public boolean login(User user) {
         User optionUser = repo.findByName(user.getUsername());
-        if (optionUser == null) {
-            throw new UserNotFoundException("User not found");
+        if(Objects.nonNull(optionUser)){
+            if(optionUser.getPassword().equals(user.getPassword())){
+                return true;
+            }
         }
-        if(optionUser.getPassword() != user.getPassword()){
-            throw new UserNotFoundException("Password not match");
-        }
-        return true;
+        return false;
     }
+
 }

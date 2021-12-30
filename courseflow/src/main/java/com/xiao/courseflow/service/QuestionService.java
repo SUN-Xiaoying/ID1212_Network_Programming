@@ -1,6 +1,7 @@
 package com.xiao.courseflow.service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -12,7 +13,7 @@ import com.xiao.courseflow.repository.QuestionRepo;
 import com.xiao.courseflow.repository.ResultRepo;
 
 @Service
-public class QuizService {
+public class QuestionService {
 	
 	@Autowired
 	Question question;
@@ -24,7 +25,28 @@ public class QuizService {
 	private Result result;
 	@Autowired
 	ResultRepo rRepo;
-	
+
+	public List<Question> listAllQuestions(){
+		return (List<Question>) qRepo.findAll();
+	}
+
+	public void save(Question q) {qRepo.save(q);}
+
+	public Question get(Integer qid) throws QuestionNotFoundException {
+		Optional<Question> result = qRepo.findById(qid);
+		if(result.isPresent()){
+			return result.get();
+		}throw new QuestionNotFoundException("Question not found!");
+	}
+
+	public void delete(Integer id) throws QuestionNotFoundException{
+		Long count = qRepo.countById(id);
+		if (count == null || count == 0){
+			throw new QuestionNotFoundException("Could not find Question by ID " +id);
+		}
+		qRepo.deleteById(id);
+	}
+
 	public QuestionForm getQuestions() {
 		List<Question> allQues = qRepo.findAll();
 		List<Question> qList = new ArrayList<Question>();

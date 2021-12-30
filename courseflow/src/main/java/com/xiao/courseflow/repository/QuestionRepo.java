@@ -6,5 +6,5 @@ import com.xiao.courseflow.model.Question;
 
 @Repository
 public interface QuestionRepo extends JpaRepository<Question, Integer> {
-
+    public Long countById(Integer id);
 }
