@@ -25,25 +25,4 @@ public class UserService {
             return result.get();
         } throw new UserNotFoundException("Could not find user!");
     }
-
-    public Boolean checkName(String username) throws UserNotFoundException {
-        Boolean bool = true;
-        User optionUser = repo.findByName(username);
-        if (optionUser == null) {
-            bool = false;
-            throw new UserNotFoundException("User not found");
-        }
-        return bool;
-    }
-
-    public boolean checkUser(User user) throws UserNotFoundException {
-        User optionUser = repo.findByName(user.getUsername());
-        if (optionUser == null) {
-            throw new UserNotFoundException("User not found");
-        }
-        if(optionUser.getPassword() != user.getPassword()){
-            throw new UserNotFoundException("Password not match");
-        }
-        return true;
-    }
 }
