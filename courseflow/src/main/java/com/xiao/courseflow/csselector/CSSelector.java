@@ -1,11 +1,24 @@
-package com.xiao.courseflow.model;
+package com.xiao.courseflow.csselector;
 
-import javax.persistence.Table;
+import javax.persistence.*;
 
+@Entity
 @Table(name="c_s_selector")
 public class CSSelector {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private int course_id;
     private int student_id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public int getCourse_id() {
         return course_id;
