@@ -1,8 +1,5 @@
-package com.xiao.courseflow.service;
+package com.xiao.courseflow.course;
 
-import com.xiao.courseflow.model.Course;
-import com.xiao.courseflow.model.User;
-import com.xiao.courseflow.repository.CourseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

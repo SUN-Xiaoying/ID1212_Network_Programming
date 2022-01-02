@@ -1,8 +1,7 @@
-package com.xiao.courseflow.controller;
+package com.xiao.courseflow.user;
 
-import com.xiao.courseflow.model.User;
-import com.xiao.courseflow.service.UserNotFoundException;
-import com.xiao.courseflow.service.UserService;
+import com.xiao.courseflow.course.Course;
+import com.xiao.courseflow.course.CourseNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -21,31 +21,37 @@ public class UserController {
     @GetMapping("/")
     public String showLoginForm(Model model, RedirectAttributes ra) {
         model.addAttribute("user", new User());
-        return "index";
+        return "auth/index";
     }
 
     @PostMapping("/login")
     public String login(@ModelAttribute("user") User user, Model m, RedirectAttributes ra) throws UserNotFoundException {
         if(uService.login(user)){
             User result = uService.findbyName(user.getUsername());
+            ra.addAttribute("uid",result.getId());
             if(result.isEnabled()){
                 return "redirect:/manager";
             }
-            return "redirect:/user";
+            return "redirect:/user/{uid}";
         }else{
             ra.addFlashAttribute("message","Failed to log in!");
             return "redirect:/";
         }
     }
 
-//    @GetMapping("/home")
-//    public String showHome(@ModelAttribute("user") User user) throws UserNotFoundException {
-//        User result = uService.findbyName(user.getUsername());
-//        if(result.isEnabled()){
-//            return "redirect:/manager";
-//        }
-//        return "redirect:/user";
-//    }
+    @GetMapping("/user/{uid}")
+    public String showUser(@PathVariable("uid") Integer uid, Model m, RedirectAttributes ra) throws UserNotFoundException, CourseNotFoundException {
+        User user = uService.get(uid);
+        List<Course> courses = uService.getCourses(uid);
+        m.addAttribute("user", user);
+        m.addAttribute("courses",courses);
+        return "auth/user";
+    }
+
+    @GetMapping("/manager")
+    public String showManager(){
+        return "auth/manager";
+    }
 
     /*  Forget Password  */
     @GetMapping("/forget")
@@ -104,7 +110,7 @@ public class UserController {
 
     /*  Sign Out  */
     @PostMapping("/logout")
-    public String signOut(HttpServletRequest request, HttpServletResponse response){
+    public String signOut(){
         return "redirect:/";
     }
 }

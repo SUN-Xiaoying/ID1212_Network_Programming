@@ -10,7 +10,11 @@
 <body>
 <!-- Navbar -->
 <div th:insert="~{components/navbar :: navbar}"></div>
-<div th:insert="~{components/back :: back}"></div>
+<div class="m-4"  th:fragment="back">
+    <button class="btn btn-light btn-sm" onclick="back()">
+        <
+    </button>
+</div>
 
 <div class="container text-center justify-content-center m-5">
     <h2 class="mb-2">Manage Courses</h2>
@@ -48,6 +52,12 @@
         </tbody>
     </table>
 </div>
+
+<script type="text/javascript">
+    function back(){
+        window.location="/manager";
+    }
+</script>
 </body>
 <!-- Footer -->
 <footer th:insert="~{components/footer :: footer}"></footer>

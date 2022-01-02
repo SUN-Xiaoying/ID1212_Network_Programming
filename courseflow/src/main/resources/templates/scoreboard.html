@@ -13,17 +13,20 @@
 <body>
 	<!-- Navbar -->
 	<div th:insert="~{components/navbar :: navbar}"></div>
+	<div th:insert="~{components/back :: back}"></div>
 
 	<!-- Main Container Start -->
 	<div class="main-container container py-5 px-4">
 		<h3 class="bg-warning text-center mb-5 p-2">ScoreBoard</h3>
-		<table>
-			<tr class="bg-dark text-light">
+		<table class="table table-light table-striped">
+			<tr>
 				<th>Name</th>
+				<th>Subject</th>
 				<th>Score</th>
 			</tr>
 			<tr th:each="score : ${sList}">
 				<td th:text="${score.username}"></td>
+				<td th:text="${score.subject}"></td>
 				<td th:text="${score.totalCorrect}"></td>
 			</tr>
 		</table>

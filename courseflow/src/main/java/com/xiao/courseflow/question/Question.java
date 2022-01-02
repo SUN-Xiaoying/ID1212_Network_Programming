@@ -1,4 +1,4 @@
-package com.xiao.courseflow.model;
+package com.xiao.courseflow.question;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +15,7 @@ public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
 	private String title;
 	private String optionA;
 	private String optionB;

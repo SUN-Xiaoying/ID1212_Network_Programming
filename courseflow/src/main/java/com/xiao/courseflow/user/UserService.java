@@ -1,10 +1,12 @@
-package com.xiao.courseflow.service;
+package com.xiao.courseflow.user;
 
-import com.xiao.courseflow.model.User;
-import com.xiao.courseflow.repository.UserRepo;
+import com.xiao.courseflow.course.Course;
+import com.xiao.courseflow.course.CourseNotFoundException;
+import com.xiao.courseflow.csselector.CSSelectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -12,6 +14,8 @@ import java.util.Optional;
 @Service
 public class UserService {
     @Autowired private UserRepo repo;
+    @Autowired
+    CSSelectorService cssService;
 
     public List<User> listAll(){
         return (List<User>) repo.findAll();
@@ -56,4 +60,10 @@ public class UserService {
         return false;
     }
 
+    /* Get Courses */
+    public List<Course> getCourses(Integer uid) throws CourseNotFoundException {
+        List<Course> courses = cssService.findCourseByStudent(uid);
+//        System.out.println(Arrays.toString(courses.toArray()));
+        return courses;
+    }
 }

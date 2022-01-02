@@ -8,14 +8,33 @@ INSERT INTO selector (course_id, question_id) VALUES (1,1);
 INSERT INTO selector (course_id, question_id) VALUES (1,2);
 INSERT INTO selector (course_id, question_id) VALUES (1,3);
 
-CREATE TABLE IF NOT EXISTS c_s_connector(
+CREATE TABLE IF NOT EXISTS c_q_selector(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    course_id INT NOT NULL,
+    question_id INT NOT NULL
+);
+INSERT INTO c_q_selector (course_id, question_id) VALUES (1,10);
+INSERT INTO c_q_selector (course_id, question_id) VALUES (1,2);
+INSERT INTO c_q_selector (course_id, question_id) VALUES (1,3);
+INSERT INTO c_q_selector (course_id, question_id) VALUES (1,4);
+INSERT INTO c_q_selector (course_id, question_id) VALUES (1,5);
+INSERT INTO c_q_selector (course_id, question_id) VALUES (1,6);
+INSERT INTO c_q_selector (course_id, question_id) VALUES (1,7);
+INSERT INTO c_q_selector (course_id, question_id) VALUES (1,8);
+INSERT INTO c_q_selector (course_id, question_id) VALUES (1,9);
+INSERT INTO c_q_selector (course_id, question_id) VALUES (1,16);
+INSERT INTO c_q_selector (course_id, question_id) VALUES (2,17);
+
+CREATE TABLE IF NOT EXISTS c_s_selector(
     course_id INT NOT NULL,
     student_id INT NOT NULL,
-    FOREIGN KEY (course_id) REFERENCES courses(id),
-    FOREIGN KEY (student_id) REFERENCES users(id)
+--     FOREIGN KEY (course_id) REFERENCES courses(id),
+--     FOREIGN KEY (student_id) REFERENCES users(id)
 );
-INSERT INTO c_s_connector (course_id, student_id) VALUES (1,1);
-INSERT INTO c_s_connector (course_id, student_id) VALUES (2,1);
+INSERT INTO c_s_selector (course_id, student_id) VALUES (1,2);
+INSERT INTO c_s_selector (course_id, student_id) VALUES (2,2);
+
+SELECT * FROM courses INNER JOIN c_s_selector ON courses.id=c_s_selector.course_id AND c_s_selector.student_id=2;
 
 CREATE TABLE IF NOT EXISTS questions (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -136,3 +155,13 @@ VALUES(
           3,
           -1)
 ;
+
+
+CREATE TABLE IF NOT EXISTS results(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    uid INT NOT NULL,
+    cid INT NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    total_correct INT NOT NULL
+ );

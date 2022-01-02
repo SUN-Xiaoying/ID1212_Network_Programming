@@ -1,9 +1,5 @@
-package com.xiao.courseflow.controller;
+package com.xiao.courseflow.course;
 
-import com.xiao.courseflow.model.Course;
-import com.xiao.courseflow.service.CourseNotFoundException;
-import com.xiao.courseflow.service.CourseService;
-import com.xiao.courseflow.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

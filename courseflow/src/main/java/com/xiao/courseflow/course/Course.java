@@ -1,4 +1,4 @@
-package com.xiao.courseflow.model;
+package com.xiao.courseflow.course;
 
 import javax.persistence.*;
 
@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Table(name="courses")
 public class Course {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)

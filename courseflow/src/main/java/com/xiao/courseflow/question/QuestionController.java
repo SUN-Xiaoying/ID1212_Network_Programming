@@ -1,31 +1,32 @@
-package com.xiao.courseflow.controller;
+package com.xiao.courseflow.question;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.xiao.courseflow.model.Question;
-import com.xiao.courseflow.service.QuestionNotFoundException;
-import com.xiao.courseflow.service.UserNotFoundException;
-import com.xiao.courseflow.service.UserService;
+import com.xiao.courseflow.cqselector.CQSelectorService;
+import com.xiao.courseflow.result.ResultService;
+import com.xiao.courseflow.user.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.xiao.courseflow.model.QuestionForm;
-import com.xiao.courseflow.model.Result;
-import com.xiao.courseflow.service.QuestionService;
+import com.xiao.courseflow.result.Result;
 
 @Controller
 public class QuestionController {
-	
-	@Autowired Result result;
-	@Autowired QuestionService qService;
 
-	Boolean submitted = false;
+	@Autowired QuestionService qService;
+	@Autowired CQSelectorService cqService;
+
 	/*  Show Question List  */
-	@GetMapping("/course/{id}")
-	public String showQuestionList(@PathVariable("id") Integer id, Model model){
-		List<Question> listQuestions = qService.listAllQuestions();
+	@GetMapping("/course/{cid}")
+	public String showQuestionList(@PathVariable("cid") Integer cid, Model model) throws QuestionNotFoundException {
+		List<Integer> qids = cqService.findQuestionByCourse(cid);
+		List<Question> listQuestions = new ArrayList<>();
+		for (Integer qid : qids) {
+			listQuestions.add(qService.get(qid));
+		}
 		model.addAttribute("listQuestions",listQuestions);
 		return "exams/questions";
 	}
@@ -46,7 +47,7 @@ public class QuestionController {
 	}
 
 	@GetMapping("/course/{id}/question/delete/{qid}")
-	public String deleteQuestion(@PathVariable("id") Integer id, @PathVariable("qid") Integer qid, RedirectAttributes ra) throws QuestionNotFoundException{
+	public String deleteQuestion(@PathVariable("id") Integer id, @PathVariable("qid") Integer qid, RedirectAttributes ra){
 		try {
 			qService.delete(qid);
 			ra.addFlashAttribute("message","The Question ID: " + qid + " has been deleted!");
@@ -57,7 +58,7 @@ public class QuestionController {
 	}
 
 	@GetMapping("/course/{id}/question/edit/{qid}")
-	public String editQuestion(@PathVariable("id") Integer id, @PathVariable("qid") Integer qid, Model m,RedirectAttributes ra) throws QuestionNotFoundException{
+	public String editQuestion(@PathVariable("id") Integer id, @PathVariable("qid") Integer qid, Model m,RedirectAttributes ra){
 		try {
 			Question q = qService.get(qid);
 			qService.delete(qid);
@@ -70,55 +71,5 @@ public class QuestionController {
 		return "redirect:/course/{id}";
 	}
 
-	/* Take exams */
-	@ModelAttribute("result")
-	public Result getResult() {
-		return result;
-	}
-
-	@GetMapping("/user")
-	public String showUser(){
-		return "user";
-	}
-
-	@GetMapping("/manager")
-	public String showManager(){
-		return "manager";
-	}
-
-	@PostMapping("/quiz")
-	public String quiz(@RequestParam String username, Model m, RedirectAttributes ra) throws UserNotFoundException {
-		if(username.equals("")) {
-			ra.addFlashAttribute("warning", "You must enter your name");
-			return "redirect:/";
-		}
-
-		submitted = false;
-		result.setUsername(username);
-
-		QuestionForm qForm = qService.getQuestions();
-		m.addAttribute("qForm", qForm);
-
-		return "quiz.html";
-	}
-	
-	@PostMapping("/submit")
-	public String submit(@ModelAttribute QuestionForm qForm, Model m) {
-		if(!submitted) {
-			result.setTotalCorrect(qService.getResult(qForm));
-			qService.saveScore(result);
-			submitted = true;
-		}
-		
-		return "result.html";
-	}
-	
-	@GetMapping("/score")
-	public String score(Model m) {
-		List<Result> sList = qService.getTopScore();
-		m.addAttribute("sList", sList);
-		
-		return "scoreboard.html";
-	}
 
 }
