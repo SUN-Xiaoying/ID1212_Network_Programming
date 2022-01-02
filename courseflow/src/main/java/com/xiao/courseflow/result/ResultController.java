@@ -2,7 +2,6 @@ package com.xiao.courseflow.result;
 
 import com.xiao.courseflow.course.CourseNotFoundException;
 import com.xiao.courseflow.course.CourseService;
-import com.xiao.courseflow.question.Question;
 import com.xiao.courseflow.question.QuestionForm;
 import com.xiao.courseflow.question.QuestionNotFoundException;
 import com.xiao.courseflow.question.QuestionService;

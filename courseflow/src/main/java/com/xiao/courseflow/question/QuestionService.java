@@ -6,10 +6,7 @@ import java.util.Random;
 
 import com.xiao.courseflow.cqselector.CQSelectorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import com.xiao.courseflow.result.Result;
-import com.xiao.courseflow.result.ResultRepo;
 
 @Service
 public class QuestionService {

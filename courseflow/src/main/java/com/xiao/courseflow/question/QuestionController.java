@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.xiao.courseflow.cqselector.CQSelectorService;
-import com.xiao.courseflow.result.ResultService;
-import com.xiao.courseflow.user.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.xiao.courseflow.result.Result;
 
 @Controller
 public class QuestionController {

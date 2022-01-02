@@ -63,7 +63,6 @@ public class UserService {
     /* Get Courses */
     public List<Course> getCourses(Integer uid) throws CourseNotFoundException {
         List<Course> courses = cssService.findCourseByStudent(uid);
-//        System.out.println(Arrays.toString(courses.toArray()));
         return courses;
     }
 }

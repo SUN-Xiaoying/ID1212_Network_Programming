@@ -17,11 +17,6 @@ public class CQSelectorService {
 
     public List<Integer> findQuestionByCourse(Integer cid) {
         List<Integer> qids = cqRepo.findQuestionByCourse(cid);
-//        List<Question> questions = new ArrayList<>();
-//        for(Integer qid: qids){
-//            questions.add(qServie.get(qid));
-//        }
-//        return questions;
         return qids;
     }
 }
