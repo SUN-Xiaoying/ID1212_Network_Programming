@@ -11,4 +11,7 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     public User findByName(String name);
 
     public Long countById(Integer id);
+
+    @Query("SELECT u.username, c.subject FROM User u JOIN u.courses c WHERE c.id=1")
+    public String getFirstCourse();
 }

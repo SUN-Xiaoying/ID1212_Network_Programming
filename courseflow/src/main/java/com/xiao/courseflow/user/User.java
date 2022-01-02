@@ -1,7 +1,16 @@
 package com.xiao.courseflow.model;
 
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import net.bytebuddy.asm.Advice;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="users")
 public class User {
@@ -16,6 +25,18 @@ public class User {
     private String password;
 
     private boolean enabled;
+
+    @OneToMany(targetEntity = Course.class, cascade = CascadeType.ALL)
+    @JoinColumn(name="cid",referencedColumnName = "id")
+    private List<Integer> cselector;
+
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(
+            name="my_courses",
+            joinColumns = @JoinColumn(name="student_id"),
+            inverseJoinColumns = @JoinColumn(name="course_id")
+    )
+    private Set<Course> courses = new HashSet<>();
 
     public Integer getId() {
         return id;
