@@ -38,7 +38,8 @@ public class ResultController {
     public String quiz(@PathVariable("uid") Integer uid, @PathVariable("cid") Integer cid, Model m, RedirectAttributes ra){
 
         submitted = false;
-
+        ra.addAttribute("uid", uid);
+        ra.addAttribute("cid",cid);
         result.setUid(uid);
         result.setCid(cid);
         try{
@@ -62,7 +63,6 @@ public class ResultController {
 
         return "quiz";
     }
-
     @PostMapping("/submit")
     public String submit(@ModelAttribute QuestionForm qForm, Model m) {
         if(!submitted) {
@@ -74,6 +74,17 @@ public class ResultController {
 
         return "result";
     }
+//    @PostMapping("/submit")
+//    public String submit(@ModelAttribute QuestionForm qForm, Model m) {
+//        if(!submitted) {
+//            result.setTotalCorrect(rService.getResult(qForm));
+//            rService.saveScore(result);
+//            m.addAttribute("result",result);
+//            submitted = true;
+//        }
+//
+//        return "result";
+//    }
 
     @GetMapping("/score")
     public String score(Model m) {
